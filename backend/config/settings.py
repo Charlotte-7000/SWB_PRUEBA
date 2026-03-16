@@ -1,5 +1,7 @@
 from pathlib import Path
 from datetime import timedelta
+import os
+import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -54,14 +56,9 @@ TEMPLATES = [
 WSGI_APPLICATION = "config.wsgi.application"
 
 DATABASES = {
-    "default": {
-        "ENGINE":   "django.db.backends.postgresql",
-        "NAME":     "Biblioteca",
-        "USER":     "swb_user",
-        "PASSWORD": "tilines1234",
-        "HOST":     "localhost",
-        "PORT":     "5432",
-    }
+    'default': dj_database_url.config(
+        default=os.environ.get('DATABASE_URL')
+    )
 }
 
 LANGUAGE_CODE = "es-mx"
